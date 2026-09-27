@@ -22,20 +22,20 @@ def get_transcript(url: str) -> str:
     cleaned string.
     """
     video_id = extract_video_id(url)
+    ytt_api = YouTubeTranscriptApi()
 
     try:
-        transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
+        fetched_transcript = ytt_api.fetch(video_id)
     except TranscriptsDisabled:
         raise ValueError("Transcripts are disabled for this video.")
     except NoTranscriptFound:
         raise ValueError("No transcript found for this video.")
 
-    full_text = " ".join(entry["text"] for entry in transcript_list)
+    full_text = " ".join(snippet.text for snippet in fetched_transcript)
     return full_text
 
 
 if __name__ == "__main__":
-    # Quick manual test
     test_url = input("Enter a YouTube URL: ")
     try:
         text = get_transcript(test_url)
