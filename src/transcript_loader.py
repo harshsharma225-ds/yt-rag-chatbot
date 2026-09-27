@@ -16,26 +16,27 @@ def extract_video_id(url: str) -> str:
     raise ValueError("Could not extract video ID from URL.")
 
 
-def get_transcript(url: str) -> str:
+def get_transcript(url: str, languages: list[str] = ["en", "hi"]) -> str:
     """
     Fetch the transcript for a given YouTube URL and return it as a single
-    cleaned string.
+    cleaned string. Tries languages in the given priority order.
     """
     video_id = extract_video_id(url)
     ytt_api = YouTubeTranscriptApi()
 
     try:
-        fetched_transcript = ytt_api.fetch(video_id)
+        fetched_transcript = ytt_api.fetch(video_id, languages=languages)
     except TranscriptsDisabled:
         raise ValueError("Transcripts are disabled for this video.")
     except NoTranscriptFound:
-        raise ValueError("No transcript found for this video.")
+        raise ValueError(f"No transcript found for this video in languages: {languages}")
 
     full_text = " ".join(snippet.text for snippet in fetched_transcript)
     return full_text
 
 
 if __name__ == "__main__":
+    # Quick manual test
     test_url = input("Enter a YouTube URL: ")
     try:
         text = get_transcript(test_url)
