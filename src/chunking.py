@@ -1,5 +1,5 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.docstore.document import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.documents import Document
 
 
 def chunk_transcript(text: str, chunk_size: int = 800, chunk_overlap: int = 100) -> list[Document]:
