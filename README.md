@@ -21,18 +21,17 @@ Paste a YouTube video link, and ask questions about its content — powered by a
 
 ## Project Structure
 
-| Path | Description |
-|------|-------------|
-| `app.py` | Streamlit entry point |
-| `src/transcript_loader.py` | Fetch + clean YouTube transcripts (EN/HI) |
-| `src/chunking.py` | Split transcript into overlapping chunks |
-| `src/vectorstore.py` | Embed + persist/load Chroma vectorstore per video |
-| `src/qa_chain.py` | Retrieval + Groq LLM answer chain |
-| `data/` | Cached transcripts (git-ignored) |
-| `vectorstore/` | Persisted Chroma DBs per video (git-ignored) |
-| `requirements.txt` | Python dependencies |
-| `.env` | API keys (git-ignored) |
-| `README.md` | This file |d
+- **`app.py`** — Streamlit entry point
+- **`src/`**
+  - **`transcript_loader.py`** — Fetch + clean YouTube transcripts (EN/HI)
+  - **`chunking.py`** — Split transcript into overlapping chunks
+  - **`vectorstore.py`** — Embed + persist/load Chroma vectorstore per video
+  - **`qa_chain.py`** — Retrieval + Groq LLM answer chain
+- **`data/`** — Cached transcripts (git-ignored)
+- **`vectorstore/`** — Persisted Chroma DBs per video (git-ignored)
+- **`requirements.txt`** — Python dependencies
+- **`.env`** — API keys (git-ignored)
+- **`README.md`** — This file
 
 
 ## Setup
